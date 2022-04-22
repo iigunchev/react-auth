@@ -1,14 +1,20 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
+import { Login } from './features/auth/Login';
 import './App.css';
 
 function App() {
+  const userEmail = useSelector(state => state.auth.email)
+  console.log(userEmail)
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
+        <div>{userEmail}</div>
+        <Login />
+        {/* <Counter />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
@@ -49,7 +55,7 @@ function App() {
           >
             React Redux
           </a>
-        </span>
+        </span> */}
       </header>
     </div>
   );
