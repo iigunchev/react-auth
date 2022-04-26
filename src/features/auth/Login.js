@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { app } from '../../Firebase/firebase'
 import { setUser } from '../../features/auth/authSlice'
+import { useNavigate } from 'react-router-dom';
 
 const initialState = {
   email: '',
@@ -13,6 +14,8 @@ export const Login = () => {
   const [values, setValues] = useState(initialState)
   const [queryState, setQueryState] = useState('')
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  
   const handleChange = e => {
     const { name, value } = e.target;
     setValues({...values, [name]: value})
@@ -29,6 +32,7 @@ export const Login = () => {
             id: user.uid,
         }))
         setQueryState('success')
+        
     })
     .catch((e) => {
         console.log(e.message)
@@ -47,6 +51,7 @@ export const Login = () => {
         }))
         setValues(initialState)
         setQueryState('success')
+        navigate('/');
     })
     .catch((e) => {
         console.log(e.message)
@@ -54,7 +59,7 @@ export const Login = () => {
     })
   }
   return (
-    <div>
+    <div className="login">
       <form>
         <input 
           type="text" 
